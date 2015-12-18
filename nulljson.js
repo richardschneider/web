@@ -5,12 +5,15 @@
 'use strict';
 const mung = require('express-mung');
 
-/* Convert null json to empty document {} */
+/* 
+ * Convert null json to empty document {} 
+ *
+ *   @param {Object} the JSON body as an object.
+ */
+
 function nulljson(body, req, res) {
     console.log('nulljson');
-    if ((body === null) || (body == 'null')) {
-        body = '{}'; // --------------->>>>>>>> [3]
-    }
+    body = body || {};
     return body;
 }
 

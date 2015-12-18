@@ -5,7 +5,6 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-var mung = require('./nulljson');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var api = require('./routes/api/api');
@@ -25,7 +24,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // middleware to change null response to empty object {}
-app.use(mung); // --------------->>>>>>>> [1]
+app.use(require('./nulljson'));
 
 app.use('/', routes);
 app.use('/users', users);
@@ -61,8 +60,5 @@ app.use(function(err, req, res, next) {
     error: {}
   });
 });
-
-// middleware to change null response to empty object {}
-//app.use(mung); // --------------->>>>>>>> [2]
 
 module.exports = app;
